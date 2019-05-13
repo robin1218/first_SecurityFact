@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define BUFFER_SIZE 16
+int main()
+{
+    FILE *fp=NULL;
+    char buff[BUFFER_SIZE]={0};
+    long offset=0;
+    int read =0;
+    int num =0;
+    fp=fopen("c:\\cc\\cc.txt","rb");
+    if(fp==NULL) return -1;
+    while((read=fread(&buff,sizeof(char),BUFFER_SIZE,fp))!=0){
+        printf("%.10X:",offset);
+        for(num=0;num<read;num++){
+            printf("%.2X ",buff[num]&0XFF);
+        }
+        offset+=read;
+        printf("\n");
+    }
+    fclose(fp);
+    return 0;
+}
